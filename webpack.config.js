@@ -1,6 +1,6 @@
 module.exports = {
 	entry: {
-		main: './index.js'
+		index: './index.js'
 	},
 	mode: 'development',
 	optimization: {
