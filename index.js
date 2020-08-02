@@ -9,11 +9,20 @@ class MyComponent extends Component {
 					<li id="just-a-second-li-id">second item</li>
 					<li id="just-a-third-li-id">third item</li>
 				</ul>
+				<p>Let's render children</p>
+				{this.children}
 			</div>
 		);
 	}
 }
 
-let node = <MyComponent />;
+let node = (
+	<MyComponent>
+		<ol>
+			<li>Just a child to show</li>
+			<li>Another child to show</li>
+		</ol>
+	</MyComponent>
+);
 
 TinyReact.render(node, document.body);

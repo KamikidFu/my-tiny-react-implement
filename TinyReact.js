@@ -23,12 +23,18 @@ class TextWrapper {
 }
 
 export class Component {
+	constructor() {
+		this.children = [];
+	}
 	setAttribute(name, value) {
 		this[name] = value;
 	}
 	mountTo(parent) {
 		let vdom = this.render();
 		vdom.mountTo(parent);
+	}
+	appendChild(vchild) {
+		this.children.push(vchild);
 	}
 }
 
@@ -46,13 +52,20 @@ export const TinyReact = {
 			element.setAttribute(name, attributes[name]);
 		}
 		//process children
-		for (const child of children) {
-			if (typeof child === 'string') {
-				//text content in node
-				child = new TextWrapper(child);
+		let processChildren = (children) => {
+			for (const child of children) {
+				if (typeof child === 'string') {
+					//text content in node
+					child = new TextWrapper(child);
+				}
+				if (typeof child === 'object' && child instanceof Array) {
+					processChildren(child);
+				} else {
+					element.appendChild(child);
+				}
 			}
-			element.appendChild(child);
-		}
+		};
+		processChildren(children);
 		return element;
 	},
 	render(vdom, element) {
