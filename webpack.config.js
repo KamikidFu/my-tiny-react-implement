@@ -1,6 +1,7 @@
 module.exports = {
 	entry: {
-		index: './index.js'
+		index: './index.js',
+		tictactoe: './tictactoe.js'
 	},
 	mode: 'development',
 	optimization: {
